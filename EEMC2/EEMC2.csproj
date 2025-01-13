@@ -10,6 +10,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EEMC2.Services\EEMC2.Services.csproj" />
   </ItemGroup>
 
 </Project>

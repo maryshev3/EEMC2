@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EEMC2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow"
+        xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
+        DataContext="{Binding MainWindowVM, Source={StaticResource ViewModelLocator}}"
+        Height="450"
+        Width="800">
+    <Grid Margin="5">
+        <ScrollViewer>
+            <ContentControl Content="{Binding Path=SelectedViewModel}"/>
+        </ScrollViewer>
     </Grid>
 </Window>

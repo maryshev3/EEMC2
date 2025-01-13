@@ -2,8 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:EEMC2"
+             xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
+             xmlns:views="clr-namespace:EEMC2.Views"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Generics.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate DataType="{x:Type viewmodels:CoursesListVM}">
+                <views:CoursesList/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

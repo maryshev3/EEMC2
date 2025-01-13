@@ -1,0 +1,27 @@
+﻿<Page x:Class="EEMC2.Views.CoursesList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EEMC2.Views"
+      mc:Ignorable="d"
+      Title="CoursesList"
+      xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
+      d:DataContext="{d:DesignInstance Type=viewmodels:CoursesListVM}"
+        DataContext="{Binding CoursesListVM, Source={StaticResource ViewModelLocator}}">
+
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Path}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:CoursesListItem/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Page>

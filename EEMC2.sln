@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEMC2", "EEMC2\EEMC2.csproj", "{8FC3678E-FEE4-45B0-9E97-51F24885836B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E708E0B-955E-473C-8521-46C31C6C09C6} = {3E708E0B-955E-473C-8521-46C31C6C09C6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEMC2.Services", "EEMC2.Services\EEMC2.Services.csproj", "{3E708E0B-955E-473C-8521-46C31C6C09C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{8FC3678E-FEE4-45B0-9E97-51F24885836B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC3678E-FEE4-45B0-9E97-51F24885836B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC3678E-FEE4-45B0-9E97-51F24885836B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
