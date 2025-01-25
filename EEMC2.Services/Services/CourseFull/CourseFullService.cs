@@ -22,11 +22,11 @@ namespace EEMC2.Services.Services.CourseFull
 
         public IEnumerable<CourseFullFromModel> Get()
         {
-            var courses = _courseService.Get();
+            //var courses = _courseService.Get();
 
-            var courseImages = _courseImageService.Get();
+            //var courseImages = _courseImageService.Get();
 
-
+            throw new NotImplementedException();
         }
     }
 }
