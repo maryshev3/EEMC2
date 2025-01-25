@@ -9,6 +9,6 @@ namespace EEMC2.Services.Services.CourseFull
 {
     public interface ICourseFullService
     {
-        public CourseFullFromModel Get();
+        public IEnumerable<CourseFullFromModel> Get();
     }
 }

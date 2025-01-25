@@ -1,4 +1,5 @@
 ﻿using EEMC2.Services.Services.Course;
+using EEMC2.Services.Services.CourseImage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,21 @@ namespace EEMC2.Services.Services.CourseFull
     public class CourseFullService : ICourseFullService
     {
         private readonly ICourseService _courseService;
+        private readonly ICourseImageService _courseImageService;
 
-        public CourseFullService(ICourseService courseService)
+        public CourseFullService(ICourseService courseService, ICourseImageService courseImageService)
         {
             _courseService = courseService;
+            _courseImageService = courseImageService;
         }
 
-        public CourseFullFromModel Get()
+        public IEnumerable<CourseFullFromModel> Get()
         {
-            throw new NotImplementedException();
+            var courses = _courseService.Get();
+
+            var courseImages = _courseImageService.Get();
+
+
         }
     }
 }

@@ -8,29 +8,13 @@ using Newtonsoft.Json;
 
 namespace EEMC2.Services.Repositories.Course
 {
-    public class CourseFileRepository : ICourseRepository
+    public class CourseFileRepository : FileRepositoryBase<CourseFromModel>, ICourseRepository
     {
-        private readonly string _courseFullFileName;
-
-        public CourseFileRepository(string baseFilePath, string courseFileName)
+        public CourseFileRepository(string baseFilePath, string courseFileName) : base(baseFilePath, courseFileName)
         {
-            _courseFullFileName = Path.Combine(baseFilePath, courseFileName);
         }
 
-        private void SaveCourses(IEnumerable<CourseFromModel> courses) =>
-            File
-                .WriteAllText(
-                    _courseFullFileName,
-                    JsonConvert.SerializeObject(courses)
-                );
-
-        public List<CourseFromModel> Get() =>
-            JsonConvert
-                .DeserializeObject<List<CourseFromModel>>(
-                    File.ReadAllText(_courseFullFileName)
-                );
-
-        public void Add(CourseFromModel course)
+        public override void Add(CourseFromModel course)
         {
             List<CourseFromModel> currentCoursesList = Get();
 
@@ -39,10 +23,10 @@ namespace EEMC2.Services.Repositories.Course
                 throw new ArgumentException($"При добавлении курса произошла ошибка. В файле с курсами \"{course.Id}\" уже существует. Сохранение невозможно.");
             }
 
-            SaveCourses(currentCoursesList.Append(course));
+            Save(currentCoursesList.Append(course));
         }
 
-        public void Remove(CourseFromModel course)
+        public override void Remove(CourseFromModel course)
         {
             List<CourseFromModel> currentCoursesList = Get();
 
@@ -51,10 +35,10 @@ namespace EEMC2.Services.Repositories.Course
                 throw new ArgumentException($"При удалении курса произошла ошибка. В файле с курсами \"{course.Id}\" не существует. Сохранение невозможно.");
             }
 
-            SaveCourses(currentCoursesList.Where(currentCourse => currentCourse.Id != course.Id));
+            Save(currentCoursesList.Where(currentCourse => currentCourse.Id != course.Id));
         }
 
-        public void Update(CourseFromModel course)
+        public override void Update(CourseFromModel course)
         {
             List<CourseFromModel> currentCoursesList = Get();
 
@@ -65,7 +49,7 @@ namespace EEMC2.Services.Repositories.Course
                 throw new ArgumentException($"При обновлении курса произошла ошибка. В файле с курсами \"{course.Id}\" не существует. Сохранение невозможно.");
             }
 
-            SaveCourses(currentCoursesList.Where(currentCourse => currentCourse != currentCourseForUpdate).Append(course));
+            Save(currentCoursesList.Where(currentCourse => currentCourse != currentCourseForUpdate).Append(course));
         }
     }
 }

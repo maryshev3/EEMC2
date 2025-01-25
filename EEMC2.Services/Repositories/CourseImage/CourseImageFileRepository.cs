@@ -7,26 +7,48 @@ using CourseImageFromModel = EEMC2.Services.Models.CourseImage;
 
 namespace EEMC2.Services.Repositories.CourseImage
 {
-    public class CourseImageFileRepository : ICourseImageRepository
+    public class CourseImageFileRepository : FileRepositoryBase<CourseImageFromModel>, ICourseImageRepository
     {
-        public void Add(CourseImageFromModel course)
+        public CourseImageFileRepository(string baseFilePath, string courseImageFileName) : base(baseFilePath, courseImageFileName)
         {
-            throw new NotImplementedException();
         }
 
-        public List<CourseImageFromModel> Get()
+        public override void Add(CourseImageFromModel courseImage)
         {
-            throw new NotImplementedException();
+            List<CourseImageFromModel> currentCourseImagesList = Get();
+
+            if (currentCourseImagesList.Any(currentCourseImage => currentCourseImage.Id == courseImage.Id))
+            {
+                throw new ArgumentException($"При добавлении картинки курса произошла ошибка. В файле с картинками курса \"{courseImage.Id}\" уже существует. Сохранение невозможно.");
+            }
+
+            Save(currentCourseImagesList.Append(courseImage));
         }
 
-        public void Remove(CourseImageFromModel course)
+        public override void Remove(CourseImageFromModel courseImage)
         {
-            throw new NotImplementedException();
+            List<CourseImageFromModel> currentCourseImagesList = Get();
+
+            if (!currentCourseImagesList.Any(currentCourseImage => currentCourseImage.Id == courseImage.Id))
+            {
+                throw new ArgumentException($"При удалении картинки курса произошла ошибка. В файле с картинками курса \"{courseImage.Id}\" не существует. Сохранение невозможно.");
+            }
+
+            Save(currentCourseImagesList.Where(currentCourseImage => currentCourseImage.Id != courseImage.Id));
         }
 
-        public void Update(CourseImageFromModel course)
+        public override void Update(CourseImageFromModel courseImage)
         {
-            throw new NotImplementedException();
+            List<CourseImageFromModel> currentCourseImagesList = Get();
+
+            CourseImageFromModel currentCourseForUpdate = currentCourseImagesList.FirstOrDefault(currentCourse => currentCourse.Id == courseImage.Id);
+
+            if (currentCourseForUpdate == default)
+            {
+                throw new ArgumentException($"При обновлении картинки курса произошла ошибка. В файле с картинками курса \"{courseImage.Id}\" не существует. Сохранение невозможно.");
+            }
+
+            Save(currentCourseImagesList.Where(currentCourseImage => currentCourseImage != currentCourseForUpdate).Append(courseImage));
         }
     }
 }
