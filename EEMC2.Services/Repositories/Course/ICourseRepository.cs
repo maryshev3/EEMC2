@@ -8,11 +8,7 @@ using CourseFromModel = EEMC2.Services.Models.Course;
 
 namespace EEMC2.Services.Repositories.Course
 {
-    public interface ICourseRepository
+    public interface ICourseRepository : IRepository<CourseFromModel>
     {
-        public List<CourseFromModel> Get();
-        public void Remove(CourseFromModel course);
-        public void Add(CourseFromModel course);
-        public void Update(CourseFromModel course);
     }
 }
