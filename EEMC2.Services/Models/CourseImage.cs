@@ -9,7 +9,7 @@ namespace EEMC2.Services.Models
     public class CourseImage
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string CourseName { get; set; }
+        public Guid CourseId { get; set; }
         public string ImagePath { get; set; }
     }
 }

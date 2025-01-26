@@ -3,12 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEMC2", "EEMC2\EEMC2.csproj", "{8FC3678E-FEE4-45B0-9E97-51F24885836B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3E708E0B-955E-473C-8521-46C31C6C09C6} = {3E708E0B-955E-473C-8521-46C31C6C09C6}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EEMC2", "EEMC2\EEMC2.csproj", "{8FC3678E-FEE4-45B0-9E97-51F24885836B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEMC2.Services", "EEMC2.Services\EEMC2.Services.csproj", "{3E708E0B-955E-473C-8521-46C31C6C09C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEMC2.ImageGenerator", "EEMC2.ImageGenerator\EEMC2.ImageGenerator.csproj", "{B1036106-4D27-4695-8C0F-10D26E736DD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEMC2.ImageGenerator.Test", "EEMC2.ImageGenerator.Test\EEMC2.ImageGenerator.Test.csproj", "{67E6FE7D-00DC-4A83-9CD9-41A848B59D8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,8 +25,19 @@ Global
 		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E708E0B-955E-473C-8521-46C31C6C09C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1036106-4D27-4695-8C0F-10D26E736DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1036106-4D27-4695-8C0F-10D26E736DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1036106-4D27-4695-8C0F-10D26E736DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1036106-4D27-4695-8C0F-10D26E736DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E6FE7D-00DC-4A83-9CD9-41A848B59D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E6FE7D-00DC-4A83-9CD9-41A848B59D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E6FE7D-00DC-4A83-9CD9-41A848B59D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E6FE7D-00DC-4A83-9CD9-41A848B59D8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67A404EE-B533-4AA9-977D-8FF89C1ADC1B}
 	EndGlobalSection
 EndGlobal

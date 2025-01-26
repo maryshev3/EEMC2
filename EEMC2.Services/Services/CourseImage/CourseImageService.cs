@@ -20,22 +20,22 @@ namespace EEMC2.Services.Services.CourseImage
 
         public void Add(CourseImageFromModel courseImage)
         {
-            throw new NotImplementedException();
+            _courseImageRepository.Add(courseImage);
         }
 
         public IEnumerable<CourseImageFromModel> Get()
         {
-            throw new NotImplementedException();
+            return _courseImageRepository.Get();
         }
 
         public void Remove(CourseImageFromModel courseImage)
         {
-            throw new NotImplementedException();
+            _courseImageRepository.Remove(courseImage);
         }
 
         public void Update(CourseImageFromModel courseImage)
         {
-            throw new NotImplementedException();
+            _courseImageRepository.Update(courseImage);
         }
     }
 }
