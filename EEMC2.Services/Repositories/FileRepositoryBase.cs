@@ -14,6 +14,16 @@ namespace EEMC2.Services.Repositories
         public FileRepositoryBase(string baseFilePath, string entityFileName)
         {
             _entityFullFileName = Path.Combine(baseFilePath, entityFileName);
+
+            EnsureFileExists(_entityFullFileName);
+        }
+
+        private void EnsureFileExists(string entityFullFileName)
+        {
+            if (!File.Exists(entityFullFileName)) 
+            {
+                File.WriteAllText(entityFullFileName, "[]");
+            }
         }
 
         public abstract void Add(T item);

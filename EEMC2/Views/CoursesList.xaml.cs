@@ -18,7 +18,7 @@ namespace EEMC2.Views
     /// <summary>
     /// Interaction logic for CoursesList.xaml
     /// </summary>
-    public partial class CoursesList : Page
+    public partial class CoursesList : UserControl
     {
         public CoursesList()
         {

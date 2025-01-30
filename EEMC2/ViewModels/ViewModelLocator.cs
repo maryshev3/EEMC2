@@ -22,7 +22,7 @@ using ImageGeneratorUtil = EEMC2.ImageGenerator.ImageGenerator;
 
 namespace EEMC2.ViewModels
 {
-    class ViewModelLocator
+    public class ViewModelLocator
     {
         private const uint _imageWidth = 600;
         private const uint _imageHeight = 356;
@@ -91,6 +91,8 @@ namespace EEMC2.ViewModels
             );
 
             InitFullServices(services);
+
+            services.AddSingleton<AppState>();
 
             services.AddSingleton<MainWindowVM>();
             services.AddSingleton<CoursesListVM>();

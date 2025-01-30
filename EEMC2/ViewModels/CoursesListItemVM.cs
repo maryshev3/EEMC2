@@ -11,7 +11,12 @@ namespace EEMC2.ViewModels
 {
     public class CoursesListItemVM : ViewModelBase
     {
-        private readonly CourseFull _courseFull;
+        private CourseFull _courseFull;
+        public CourseFull CourseFull
+        {
+            get => _courseFull;
+            set => SetProperty(ref _courseFull, value);
+        }
 
         public ICommand OpenCourse { get; private set; }
 
