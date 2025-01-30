@@ -14,8 +14,4 @@
     <ProjectReference Include="..\EEMC2.ImageGenerator\EEMC2.ImageGenerator.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Theme\" />
-  </ItemGroup>
-
 </Project>
