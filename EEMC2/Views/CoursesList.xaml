@@ -11,10 +11,14 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Command="{Binding Path=AddCourse}" Grid.Row="0"/>
+        <Button 
+            Command="{Binding Path=AddCourse}"
+            Grid.Row="0"
+            Template="{DynamicResource ResourceKey=RoundedButton}"
+            Content="Добавить курс"/>
         <ItemsControl ItemsSource="{Binding Path=Courses}" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

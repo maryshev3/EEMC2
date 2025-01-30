@@ -14,7 +14,6 @@
         x:Name="Border"
         Width="Auto"
         HorizontalAlignment="Center"
-        MinWidth="200"
         Margin="5"
         Padding="10"
         Background="White"
