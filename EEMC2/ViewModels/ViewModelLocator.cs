@@ -1,7 +1,15 @@
-﻿using EEMC2.Services.Models;
+﻿using EEMC2.AppStart;
+using EEMC2.Services.Models;
 using EEMC2.Services.Repositories.Course;
+using EEMC2.Services.Repositories.CourseImage;
+using EEMC2.Services.Repositories.Section;
+using EEMC2.Services.Repositories.Theme;
 using EEMC2.Services.Services.Course;
+using EEMC2.Services.Services.CourseFull;
 using EEMC2.Services.Services.CourseImage;
+using EEMC2.Services.Services.Section;
+using EEMC2.Services.Services.SectionFull;
+using EEMC2.Services.Services.Theme;
 using EEMC2.Services.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -24,17 +32,41 @@ namespace EEMC2.ViewModels
         public static MainWindowVM MainWindowVM => _serviceProvider.GetService<MainWindowVM>();
         public static CoursesListVM CoursesListVM => _serviceProvider.GetService<CoursesListVM>();
 
-        private static void InitFileRepositories(IServiceCollection services)
+        private static void InitFileRepositories(IServiceCollection services, string filesBasePath)
         {
             services.AddSingleton<ICourseRepository, CourseFileRepository>(_ =>
             {
-                return new CourseFileRepository(Environment.CurrentDirectory, $"{nameof(Course)}.json");
+                return new CourseFileRepository(filesBasePath, $"{nameof(Course)}.json");
+            });
+
+            services.AddSingleton<ICourseImageRepository, CourseImageFileRepository>(_ =>
+            {
+                return new CourseImageFileRepository(filesBasePath, $"{nameof(CourseImage)}.json");
+            });
+
+            services.AddSingleton<ISectionRepository, SectionFileRepository>(_ =>
+            {
+                return new SectionFileRepository(filesBasePath, $"{nameof(Section)}.json");
+            });
+
+            services.AddSingleton<IThemeRepository, ThemeFileRepository>(_ =>
+            {
+                return new ThemeFileRepository(filesBasePath, $"{nameof(Theme)}.json");
             });
         }
 
         private static void InitServices(IServiceCollection services)
         {
             services.AddSingleton<ICourseService, CourseService>();
+            services.AddSingleton<ICourseImageService, CourseImageService>();
+            services.AddSingleton<ISectionService, SectionService>();
+            services.AddSingleton<IThemeService, ThemeService>();
+        }
+
+        private static void InitFullServices(IServiceCollection services)
+        {
+            services.AddSingleton<ISectionFullService, SectionFullService>();
+            services.AddSingleton<ICourseFullService, CourseFullService>();
         }
 
         public static void Init()
@@ -45,14 +77,20 @@ namespace EEMC2.ViewModels
 
             services.AddSingleton<ImageGeneratorUtil>(_ => new ImageGeneratorUtil(_imageWidth, _imageHeight));
 
-            InitFileRepositories(services);
+            var fileStorageConstructorResult = new FileStorageConstructor().Construct();
+
+            InitFileRepositories(services, fileStorageConstructorResult.RepositoryFilesPath);
+
             InitServices(services);
+
             services.AddSingleton<CourseImageGenerator>(sp => new CourseImageGenerator(
                     courseImageService: sp.GetService<ICourseImageService>(),
                     imageGenerator: sp.GetService<ImageGeneratorUtil>(),
-                    imagesBasePath: Path.Join(Environment.CurrentDirectory, "Images")
+                    imagesBasePath: fileStorageConstructorResult.ImagesPath
                 )
             );
+
+            InitFullServices(services);
 
             services.AddSingleton<MainWindowVM>();
             services.AddSingleton<CoursesListVM>();
