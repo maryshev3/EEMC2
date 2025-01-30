@@ -10,7 +10,12 @@
         DataContext="{Binding CoursesListVM, Source={StaticResource ViewModelLocator}}">
 
     <Grid>
-        <ItemsControl ItemsSource="{Binding Path=Courses}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Command="{Binding Path=AddCourse}" Grid.Row="0"/>
+        <ItemsControl ItemsSource="{Binding Path=Courses}" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel HorizontalAlignment="Stretch"/>

@@ -60,5 +60,19 @@ namespace EEMC2.Services.Services.CourseFull
 
             return courseFulls;
         }
+
+        public CourseFullFromModel Add(Models.Course course)
+        {
+            _courseService.Add(course);
+
+            CourseFullFromModel courseFull = new()
+            {
+                Course = course,
+                CourseImage = _courseImageGenerator.GenerateImageAndSave(course.Id),
+                SectionFulls = Array.Empty<Models.SectionFull>()
+            };
+
+            return courseFull;
+        }
     }
 }

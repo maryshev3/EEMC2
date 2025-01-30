@@ -10,5 +10,6 @@ namespace EEMC2.Services.Services.CourseFull
     public interface ICourseFullService
     {
         public IEnumerable<CourseFullFromModel> Get();
+        public CourseFullFromModel Add(Models.Course course);
     }
 }
