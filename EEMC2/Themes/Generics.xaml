@@ -3,8 +3,10 @@
     <SolidColorBrush x:Key="BackgroundFirstColor" Color="#fdfdff"/>
     <SolidColorBrush x:Key="BackgroundSecondColor" Color="White"/>
     <SolidColorBrush x:Key="ForegroundMain" Color="#39393f"/>
-    <SolidColorBrush x:Key="ForegroundSelectedMain" Color="#4fbe82"/>
-    <SolidColorBrush x:Key="BackgroundHoveredMain" Color="#addfc5"/>
+    <SolidColorBrush x:Key="ForegroundSelectedAdd" Color="#5ac18f"/>
+    <SolidColorBrush x:Key="BackgroundHoveredAdd" Color="#e9f5ef"/>
+    <SolidColorBrush x:Key="ForegroundSelectedCancel" Color="#9a9eb1"/>
+    <SolidColorBrush x:Key="BackgroundHoveredCancel" Color="#f3f3f6"/>
     <SolidColorBrush x:Key="BorderBrushMain" Color="#4fbe82"/>
     <SolidColorBrush x:Key="BorderBrushSeparator" Color="#a5a9ac"/>
     <SolidColorBrush x:Key="UnEnabled" Color="#f0f0f0"/>
@@ -25,14 +27,70 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Border.IsMouseOver" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoveredMain}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoveredAdd}"/>
                 <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnEnabled}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedMain}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedAdd}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RoundedButtonWithoutBorderGreen" TargetType="Button">
+        <Border 
+    x:Name="Border"
+    Width="Auto"
+    HorizontalAlignment="Center"
+    Margin="5"
+    Padding="10"
+    Background="White"
+    Height="Auto"
+    CornerRadius="5"
+    BorderThickness="0"
+    BorderBrush="Black">
+            <ContentPresenter TextBlock.FontSize="16" HorizontalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Border.IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoveredAdd}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnEnabled}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedAdd}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RoundedButtonWithoutBorderGrey" TargetType="Button">
+        <Border 
+x:Name="Border"
+Width="Auto"
+HorizontalAlignment="Center"
+Margin="5"
+Padding="10"
+Background="White"
+Height="Auto"
+CornerRadius="5"
+BorderThickness="0"
+BorderBrush="Black">
+            <ContentPresenter TextBlock.FontSize="16" HorizontalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Border.IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoveredCancel}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnEnabled}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedCancel}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
