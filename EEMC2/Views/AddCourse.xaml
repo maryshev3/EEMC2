@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EEMC2.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewmodels:AddCourseVM}"
-             DataContext="{Binding AddCourseVM, Source={StaticResource ViewModelLocator}}">
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddCourseVM}">
     <Border CornerRadius="10" Padding="10" Background="White">
         <StackPanel Background="White">
             <StackPanel Orientation="Horizontal">
@@ -33,9 +33,16 @@
                     Margin="0, 5, 5, 5"
                     Background="White"
                     BorderThickness="0"
-                    Command="{Binding Path=}"
                     CommandParameter="{Binding Text, ElementName=inputBox}"
                     FontSize="16">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:CallMethodAction MethodName="Close"
+   TargetObject="{Binding RelativeSource={RelativeSource
+                          Mode=FindAncestor,
+                          AncestorType=Window}}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <Label>Отменить</Label>
                     </Button>
                     <Button
@@ -43,10 +50,18 @@
                     Margin="0, 5, 5, 5"
                     Background="White"
                     BorderThickness="0"
-                    Command="{Binding Path=}"
+                    Command="{Binding Path=AddCourse}"
                     CommandParameter="{Binding Text, ElementName=inputBox}"
                     FontSize="16"
                     FontWeight="SemiBold">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:CallMethodAction MethodName="Close"
+                           TargetObject="{Binding RelativeSource={RelativeSource
+                                                  Mode=FindAncestor,
+                                                  AncestorType=Window}}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <Label>Добавить</Label>
                     </Button>
                 </StackPanel>

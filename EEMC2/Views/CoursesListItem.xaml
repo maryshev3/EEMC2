@@ -15,7 +15,7 @@
                 Command="{Binding Path=OpenCourse}"
                 CommandParameter="{Binding}"
                 Background="White"
-                Height="140"
+                Height="auto"
                 Width="220"
                 Margin="10"
                 Padding="0"
@@ -25,7 +25,7 @@
                 <Grid Margin="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="220"/>
@@ -35,7 +35,14 @@
                             <ImageBrush ImageSource="{Binding Path=CourseFull.CourseImage.ImagePath}" Stretch="Fill"/>
                         </Border.Background>
                     </Border>
-                    <TextBlock Grid.Row="1" Margin="0,0,0,0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Name}" FontSize="16"/>
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="0,0,0,0"
+                        Foreground="Black"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Text="{Binding Path=CourseFull.Course.Name}"
+                        FontSize="16"/>
                 </Grid>
             </Button>
         </StackPanel>

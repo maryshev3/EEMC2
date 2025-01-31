@@ -11,6 +11,7 @@ using EEMC2.Services.Services.Section;
 using EEMC2.Services.Services.SectionFull;
 using EEMC2.Services.Services.Theme;
 using EEMC2.Services.Utils;
+using EEMC2.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -94,6 +95,7 @@ namespace EEMC2.ViewModels
             InitFullServices(services);
 
             services.AddSingleton<AppState>();
+            services.AddSingleton<WindowService>();
 
             services.AddTransient<AddCourseVM>();
             services.AddSingleton<MainWindowVM>();
