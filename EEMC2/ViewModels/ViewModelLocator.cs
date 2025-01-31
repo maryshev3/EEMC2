@@ -102,6 +102,9 @@ namespace EEMC2.ViewModels
             services.AddSingleton<CoursesListVM>();
 
             _serviceProvider = services.BuildServiceProvider();
+
+            var appState = _serviceProvider.GetService<AppState>();
+            appState.CurrentVMOnMainWindow = CoursesListVM;
         }
     }
 }
