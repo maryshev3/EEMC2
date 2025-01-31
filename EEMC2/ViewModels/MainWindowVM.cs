@@ -9,7 +9,7 @@ namespace EEMC2.ViewModels
 {
     public class MainWindowVM : ViewModelBase
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly AppState _appState;
 
         private ViewModelBase _selectedViewModel;
 
@@ -19,11 +19,15 @@ namespace EEMC2.ViewModels
             set => SetProperty(ref _selectedViewModel, value);
         }
 
-        public MainWindowVM(IServiceProvider serviceProvider)
+        public MainWindowVM(AppState appState, IServiceProvider serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            _appState = appState;
 
-            SelectedViewModel = _serviceProvider.GetRequiredService<CoursesListVM>();
+            _appState.CurrentVMOnMainWindow = serviceProvider.GetService<CoursesListVM>();
+
+            SelectedViewModel = _appState.CurrentVMOnMainWindow;
+
+            _appState.CurrentVMOnMainWindowChanged += newViewModel => SelectedViewModel = newViewModel;
         }
     }
 }
