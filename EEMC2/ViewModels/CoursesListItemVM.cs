@@ -11,6 +11,8 @@ namespace EEMC2.ViewModels
 {
     public class CoursesListItemVM : ViewModelBase
     {
+        private readonly AppState _appState;
+
         private CourseFull _courseFull;
         public CourseFull CourseFull
         {
@@ -18,18 +20,24 @@ namespace EEMC2.ViewModels
             set => SetProperty(ref _courseFull, value);
         }
 
-        public ICommand OpenCourse { get; private set; }
-
-        public CoursesListItemVM(CourseFull courseFull)
+        public CoursesListItemVM(CourseFull courseFull, AppState appState)
         {
             _courseFull = courseFull;
+            _appState = appState;
 
             OpenCourse = new ActionCommand(OnOpenCourse);
         }
 
+        public ICommand OpenCourse { get; private set; }
         private void OnOpenCourse(object param)
         {
+            if (_appState.CurrentVMOnMainWindow is CourseVM openedCourseVM
+                && openedCourseVM.CourseFull == CourseFull)
+            {
+                return;
+            }
 
+            _appState.CurrentVMOnMainWindow = new CourseVM(CourseFull);
         }
     }
 }

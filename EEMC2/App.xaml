@@ -15,6 +15,10 @@
                 <views:CoursesList/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:CourseVM}">
+                <views:CourseWindow/>
+            </DataTemplate>
+
             <viewmodels:ViewModelLocator x:Key="ViewModelLocator" />
         </ResourceDictionary>
     </Application.Resources>

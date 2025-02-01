@@ -19,7 +19,7 @@ namespace EEMC2.ViewModels
         private readonly WindowService _windowService;
 
         public ObservableCollection<CoursesListItemVM> Courses => new ObservableCollection<CoursesListItemVM>(
-            _appState.CourseFulls.Select(x => new CoursesListItemVM(x))
+            _appState.CourseFulls.Select(x => new CoursesListItemVM(x, _appState))
         );
 
         public CoursesListVM(AppState appState, WindowService windowService) 
@@ -36,7 +36,6 @@ namespace EEMC2.ViewModels
         {
             _windowService.OpenUserControl(typeof(AddCourse), typeof(AddCourseVM));
         }
-
         public ICommand AddCourse { get; private set; }
     }
 }
