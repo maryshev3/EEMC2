@@ -17,15 +17,17 @@ namespace EEMC2.ViewModels
     {
         private readonly AppState _appState;
         private readonly WindowService _windowService;
+        private readonly IServiceProvider _serviceProvider;
 
         public ObservableCollection<CoursesListItemVM> Courses => new ObservableCollection<CoursesListItemVM>(
-            _appState.CourseFulls.Select(x => new CoursesListItemVM(x, _appState))
+            _appState.CourseFulls.Select(x => new CoursesListItemVM(x, _appState, _serviceProvider))
         );
 
-        public CoursesListVM(AppState appState, WindowService windowService) 
+        public CoursesListVM(AppState appState, WindowService windowService, IServiceProvider serviceProvider) 
         {
             _appState = appState;
             _windowService = windowService;
+            _serviceProvider = serviceProvider;
 
             _appState.CourseFulls.CollectionChanged += (sender, e) => OnPropertyChanged(nameof(Courses));
 

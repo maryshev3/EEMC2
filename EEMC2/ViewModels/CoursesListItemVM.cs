@@ -12,6 +12,7 @@ namespace EEMC2.ViewModels
     public class CoursesListItemVM : ViewModelBase
     {
         private readonly AppState _appState;
+        private readonly IServiceProvider _serviceProvider;
 
         private CourseFull _courseFull;
         public CourseFull CourseFull
@@ -20,10 +21,11 @@ namespace EEMC2.ViewModels
             set => SetProperty(ref _courseFull, value);
         }
 
-        public CoursesListItemVM(CourseFull courseFull, AppState appState)
+        public CoursesListItemVM(CourseFull courseFull, AppState appState, IServiceProvider serviceProvider)
         {
             _courseFull = courseFull;
             _appState = appState;
+            _serviceProvider = serviceProvider;
 
             OpenCourse = new ActionCommand(OnOpenCourse);
         }
@@ -37,7 +39,7 @@ namespace EEMC2.ViewModels
                 return;
             }
 
-            _appState.CurrentVMOnMainWindow = new CourseVM(CourseFull);
+            _appState.CurrentVMOnMainWindow = new CourseVM(CourseFull, _appState, _serviceProvider);
         }
     }
 }

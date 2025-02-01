@@ -9,6 +9,9 @@
              xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:CourseVM}">
     <Grid>
-        <Label Content="{Binding Path=ObservableCourseFull.CourseName}"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Домой" Template="{DynamicResource RoundedButton}" Command="{Binding Path=ToHome}"/>
+            <Label Content="{Binding Path=ObservableCourseFull.CourseName}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
