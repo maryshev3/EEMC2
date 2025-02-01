@@ -8,43 +8,37 @@
             xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
             d:DataContext="{d:DesignInstance Type=viewmodels:CoursesListItemVM}">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Button
+        <Button
                 Name="CourseButton"
                 Template="{DynamicResource ResourceKey=RoundedButton}"
                 Command="{Binding Path=OpenCourse}"
                 CommandParameter="{Binding}"
                 Background="White"
                 Height="auto"
-                Width="220"
                 Margin="10"
                 Padding="0"
                 HorizontalContentAlignment="Center"
                 BorderThickness="1"
                 BorderBrush="#a4b3ca">
-                <Grid Margin="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="220"/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderThickness="0" Grid.Row="0" CornerRadius="10,10,0,0">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Path=CourseFull.CourseImage.ImagePath}" Stretch="Fill"/>
-                        </Border.Background>
-                    </Border>
-                    <TextBlock
+            <Grid Width="220">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Border BorderThickness="0" Grid.Row="0" CornerRadius="10,10,0,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Path=ObservableCourseFull.CourseFull.CourseImage.ImagePath}" Stretch="Fill"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock
                         Grid.Row="1"
                         Margin="0,0,0,0"
                         Foreground="Black"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Text="{Binding Path=CourseFull.Course.Name}"
+                        Text="{Binding Path=ObservableCourseFull.CourseFull.Course.Name}"
                         FontSize="16"/>
-                </Grid>
-            </Button>
-        </StackPanel>
+            </Grid>
+        </Button>
     </Grid>
 </UserControl>

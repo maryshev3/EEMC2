@@ -1,4 +1,5 @@
 ﻿using EEMC2.Commands;
+using EEMC2.Models;
 using EEMC2.Services.Models;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,16 @@ namespace EEMC2.ViewModels
         private readonly AppState _appState;
         private readonly IServiceProvider _serviceProvider;
 
-        private CourseFull _courseFull;
-        public CourseFull CourseFull
+        private ObservableCourseFull _observableCourseFull;
+        public ObservableCourseFull ObservableCourseFull
         {
-            get => _courseFull;
-            set => SetProperty(ref _courseFull, value);
+            get => _observableCourseFull;
+            set => SetProperty(ref _observableCourseFull, value);
         }
 
         public CoursesListItemVM(CourseFull courseFull, AppState appState, IServiceProvider serviceProvider)
         {
-            _courseFull = courseFull;
+            _observableCourseFull = new ObservableCourseFull(courseFull);
             _appState = appState;
             _serviceProvider = serviceProvider;
 
@@ -34,12 +35,12 @@ namespace EEMC2.ViewModels
         private void OnOpenCourse(object param)
         {
             if (_appState.CurrentVMOnMainWindow is CourseVM openedCourseVM
-                && openedCourseVM.ObservableCourseFull.CourseFull == CourseFull)
+                && openedCourseVM.ObservableCourseFull.CourseFull == ObservableCourseFull.CourseFull)
             {
                 return;
             }
 
-            _appState.CurrentVMOnMainWindow = new CourseVM(CourseFull, _appState, _serviceProvider);
+            _appState.CurrentVMOnMainWindow = new CourseVM(ObservableCourseFull, _appState, _serviceProvider);
         }
     }
 }

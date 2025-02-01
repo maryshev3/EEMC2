@@ -50,6 +50,7 @@ namespace EEMC2.ViewModels
             _appState.SectionsListChanged += OnSectionsListChanged;
 
             AddSection = new ActionCommand(OnAddSection);
+            OpenSection = new ActionCommand(OnOpenSection);
         }
 
         ~SectionsListVM()
@@ -76,6 +77,12 @@ namespace EEMC2.ViewModels
                     courseId: _courseId
                 )
             );
+        }
+
+        public ICommand OpenSection { get; private set; }
+        private void OnOpenSection(object param)
+        {
+
         }
     }
 }

@@ -27,9 +27,9 @@ namespace EEMC2.ViewModels
 
         public SectionsListVM SectionsListVM { get; private set; }
 
-        public CourseVM(CourseFull courseFull, AppState appState, IServiceProvider serviceProvider) 
+        public CourseVM(ObservableCourseFull observableCourseFull, AppState appState, IServiceProvider serviceProvider) 
         {
-            ObservableCourseFull = new ObservableCourseFull(courseFull);
+            ObservableCourseFull = observableCourseFull;
 
             _appState = appState;
             _serviceProvider = serviceProvider;
