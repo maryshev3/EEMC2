@@ -12,6 +12,7 @@ namespace EEMC2.Models
     public class ObservableCourseFull : ObservableObject
     {
         private readonly CourseFull _courseFull;
+        public CourseFull CourseFull => _courseFull;
 
         public ObservableCourseFull(CourseFull courseFull)
         {

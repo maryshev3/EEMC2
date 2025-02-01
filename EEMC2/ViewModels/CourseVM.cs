@@ -10,8 +10,6 @@ namespace EEMC2.ViewModels
 {
     public class CourseVM : ViewModelBase
     {
-        public CourseFull CourseFull { get; private set; }
-
         private ObservableCourseFull _observableCourseFull;
         public ObservableCourseFull ObservableCourseFull
         {
@@ -21,7 +19,6 @@ namespace EEMC2.ViewModels
 
         public CourseVM(CourseFull courseFull) 
         {
-            CourseFull = courseFull;
             ObservableCourseFull = new ObservableCourseFull(courseFull);
         }
     }

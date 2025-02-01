@@ -32,7 +32,7 @@ namespace EEMC2.ViewModels
         private void OnOpenCourse(object param)
         {
             if (_appState.CurrentVMOnMainWindow is CourseVM openedCourseVM
-                && openedCourseVM.CourseFull == CourseFull)
+                && openedCourseVM.ObservableCourseFull.CourseFull == CourseFull)
             {
                 return;
             }
