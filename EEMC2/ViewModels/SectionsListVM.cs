@@ -47,15 +47,22 @@ namespace EEMC2.ViewModels
 
             Sections = new ObservableCollection<SectionFull>(sections);
 
-            _appState.SectionsListChanged += (updatedCourse) =>
-            {
-                if (updatedCourse.Course.Id == _courseId)
-                {
-                    Sections = new ObservableCollection<SectionFull>(updatedCourse.SectionFulls);
-                }
-            };
+            _appState.SectionsListChanged += OnSectionsListChanged;
 
             AddSection = new ActionCommand(OnAddSection);
+        }
+
+        ~SectionsListVM()
+        {
+            _appState.SectionsListChanged -= OnSectionsListChanged;
+        }
+
+        private void OnSectionsListChanged(CourseFull updatedCourse)
+        {
+            if (updatedCourse.Course.Id == _courseId)
+            {
+                Sections = new ObservableCollection<SectionFull>(updatedCourse.SectionFulls);
+            }
         }
 
         public ICommand AddSection { get; private set; }
