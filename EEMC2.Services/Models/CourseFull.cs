@@ -10,6 +10,6 @@ namespace EEMC2.Services.Models
     {
         public Course Course { get; set; }
         public CourseImage CourseImage { get; set; }
-        public IEnumerable<SectionFull> SectionFulls { get; set; }
+        public List<SectionFull> SectionFulls { get; set; }
     }
 }

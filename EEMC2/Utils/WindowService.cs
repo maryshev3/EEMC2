@@ -21,9 +21,14 @@ namespace EEMC2.Utils
 
         public void OpenUserControl(Type userControlType, Type userControlVMType)
         {
-            ContentControl userControlInstance = (ContentControl)Activator.CreateInstance(userControlType);
-
             object userControlVMInstance = _serviceProvider.GetRequiredService(userControlVMType);
+
+            OpenUserControl(userControlType, userControlVMInstance);
+        }
+
+        public void OpenUserControl(Type userControlType, object userControlVMInstance)
+        {
+            ContentControl userControlInstance = (ContentControl)Activator.CreateInstance(userControlType);
 
             Window window = new Window
             {

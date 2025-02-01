@@ -55,7 +55,7 @@ namespace EEMC2.Services.Services.CourseFull
                 SectionFulls = courseIdToSections
                     .Where(lookupItem => lookupItem.Key == course.Id)
                     .SelectMany(lookupItem => lookupItem)
-                    .ToArray()
+                    .ToList()
             }).ToList();
 
             return courseFulls;
@@ -69,7 +69,7 @@ namespace EEMC2.Services.Services.CourseFull
             {
                 Course = course,
                 CourseImage = _courseImageGenerator.GenerateImageAndSave(course.Id),
-                SectionFulls = Array.Empty<Models.SectionFull>()
+                SectionFulls = new List<Models.SectionFull>()
             };
 
             return courseFull;

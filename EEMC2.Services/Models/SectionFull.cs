@@ -9,6 +9,6 @@ namespace EEMC2.Services.Models
     public class SectionFull
     {
         public Section Section { get; set; }
-        public IEnumerable<Theme> Themes { get; set; }
+        public List<Theme> Themes { get; set; }
     }
 }

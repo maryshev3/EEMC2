@@ -26,25 +26,31 @@ namespace EEMC2.Services.Services.SectionFull
         {
             var sections = _sectionService.Get();
 
-            var themes = _themeService.Get();
+            var sectionToThemes = _themeService
+                .Get()
+                .ToLookup(theme => theme.SectionId);
 
-            return sections
-                .Join(
-                    themes,
-                    section => section.Id,
-                    theme => theme.SectionId,
-                    (section, theme) => new
-                    {
-                        Section = section,
-                        Theme = theme
-                    })
-                .GroupBy(tuple => tuple.Section)
-                .Select(tuple => new Models.SectionFull()
-                    {
-                        Section = tuple.Key,
-                        Themes = tuple.Select(subTuple => subTuple.Theme).ToArray()
-                    })
-                .ToArray();
+            return sections.Select(section => new Models.SectionFull()
+            {
+                Section = section,
+                Themes = sectionToThemes
+                    .Where(sectionToThemesItem => sectionToThemesItem.Key == section.Id)
+                    .SelectMany(sectionToThemesItem => sectionToThemesItem)
+                    .ToList()
+            }).ToList();
+        }
+
+        public Models.SectionFull Add(Models.Section section)
+        {
+            Models.SectionFull sectionFull = new Models.SectionFull
+            {
+                Section = section,
+                Themes = new List<Models.Theme>()
+            };
+
+            _sectionService.Add(section);
+
+            return sectionFull;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using EEMC2.Commands;
 using EEMC2.Models;
 using EEMC2.Services.Models;
+using EEMC2.Services.Services.SectionFull;
+using EEMC2.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,11 +25,21 @@ namespace EEMC2.ViewModels
             private set => SetProperty(ref _observableCourseFull, value);
         }
 
+        public SectionsListVM SectionsListVM { get; private set; }
+
         public CourseVM(CourseFull courseFull, AppState appState, IServiceProvider serviceProvider) 
         {
             ObservableCourseFull = new ObservableCourseFull(courseFull);
+
             _appState = appState;
             _serviceProvider = serviceProvider;
+
+            SectionsListVM = new SectionsListVM(
+                appState: _appState,
+                windowService: _serviceProvider.GetService<WindowService>(),
+                sectionFullService: _serviceProvider.GetService<ISectionFullService>(),
+                courseId: ObservableCourseFull.CourseFull.Course.Id
+            );
 
             ToHome = new ActionCommand(OnToHome);
         }
