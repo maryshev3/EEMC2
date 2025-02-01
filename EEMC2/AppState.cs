@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace EEMC2
 {
     public delegate void CurrentVMOnMainWindowHandler(ViewModelBase newViewModel);
-    public delegate void SectionsListHandler(CourseFull updatedCourse);
+    public delegate void SectionsListHandler(Guid courseId);
+    public delegate void ThemesListHandler(Guid courseId, Guid sectionId);
 
     public class AppState
     {
@@ -41,6 +42,9 @@ namespace EEMC2
         }
 
         public event SectionsListHandler? SectionsListChanged;
-        public void FireSectionsListChanged(CourseFull updatedCourse) => SectionsListChanged?.Invoke(updatedCourse);
+        public void FireSectionsListChanged(Guid courseId) => SectionsListChanged?.Invoke(courseId);
+
+        public event ThemesListHandler? ThemesListChanged;
+        public void FireThemesListChanged(Guid courseId, Guid sectionId) => ThemesListChanged?.Invoke(courseId, sectionId);
     }
 }

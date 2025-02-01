@@ -1,4 +1,5 @@
 ﻿using EEMC2.Commands;
+using EEMC2.Models;
 using EEMC2.Services.Models;
 using EEMC2.Services.Services.SectionFull;
 using EEMC2.Utils;
@@ -21,11 +22,11 @@ namespace EEMC2.ViewModels
         private readonly ISectionFullService _sectionFullService;
         private readonly Guid _courseId;
 
-        private ObservableCollection<SectionFull> _sections;
-        public ObservableCollection<SectionFull> Sections 
+        private ObservableCollection<ObservableSectionFull> _observableSectionFull;
+        public ObservableCollection<ObservableSectionFull> ObservableSectionFull 
         {
-            get => _sections;
-            private set => SetProperty(ref _sections, value);
+            get => _observableSectionFull;
+            private set => SetProperty(ref _observableSectionFull, value);
         }
 
         public SectionsListVM(
@@ -40,12 +41,7 @@ namespace EEMC2.ViewModels
             _sectionFullService = sectionFullService;
             _courseId = courseId;
 
-            var sections = _appState
-                .CourseFulls
-                .First(courseFull => courseFull.Course.Id == _courseId)
-                .SectionFulls;
-
-            Sections = new ObservableCollection<SectionFull>(sections);
+            RefreshObservableSectionFull();
 
             _appState.SectionsListChanged += OnSectionsListChanged;
 
@@ -58,11 +54,22 @@ namespace EEMC2.ViewModels
             _appState.SectionsListChanged -= OnSectionsListChanged;
         }
 
-        private void OnSectionsListChanged(CourseFull updatedCourse)
+        private void RefreshObservableSectionFull()
         {
-            if (updatedCourse.Course.Id == _courseId)
+            ObservableSectionFull = new ObservableCollection<ObservableSectionFull>(
+                _appState
+                    .CourseFulls
+                    .First(courseFull => courseFull.Course.Id == _courseId)
+                    .SectionFulls
+                    .Select(section => new ObservableSectionFull(section))
+            );
+        }
+
+        private void OnSectionsListChanged(Guid courseId)
+        {
+            if (courseId == _courseId)
             {
-                Sections = new ObservableCollection<SectionFull>(updatedCourse.SectionFulls);
+                RefreshObservableSectionFull();
             }
         }
 

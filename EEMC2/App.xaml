@@ -23,6 +23,10 @@
                 <views:SectionsList/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:ThemesListVM}">
+                <views:ThemesList/>
+            </DataTemplate>
+
             <viewmodels:ViewModelLocator x:Key="ViewModelLocator" />
         </ResourceDictionary>
     </Application.Resources>

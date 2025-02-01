@@ -13,10 +13,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Content="Добавить раздел" Command="{Binding Path=AddSection}" Template="{DynamicResource RoundedButton}" Grid.Row="0"/>
-        <ListBox ItemsSource="{Binding Path=Sections}" Grid.Row="1">
+        <ListBox ItemsSource="{Binding Path=ObservableSectionFull}" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Path=Section.Name}"/>
+                    <Label Content="{Binding Path=SectionName}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
