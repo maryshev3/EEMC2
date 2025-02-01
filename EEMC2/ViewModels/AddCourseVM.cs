@@ -1,4 +1,5 @@
 ﻿using EEMC2.Commands;
+using EEMC2.Models;
 using EEMC2.Services.Models;
 using EEMC2.Services.Services.CourseFull;
 using EEMC2.Utils;
@@ -35,7 +36,10 @@ namespace EEMC2.ViewModels
             };
 
             CourseFull addedCourse = _courseFullService.Add(course);
+
             _appState.CourseFulls.Add(addedCourse);
+
+            _appState.FireCoursesListChanged(CollectionChangeType.Added, addedCourse);
         }
 
         public ICommand AddCourse { get; private set; }

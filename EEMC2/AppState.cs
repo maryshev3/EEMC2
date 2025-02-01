@@ -1,4 +1,5 @@
-﻿using EEMC2.Services.Models;
+﻿using EEMC2.Models;
+using EEMC2.Services.Models;
 using EEMC2.Services.Services.CourseFull;
 using EEMC2.ViewModels;
 using System;
@@ -11,8 +12,9 @@ using System.Threading.Tasks;
 namespace EEMC2
 {
     public delegate void CurrentVMOnMainWindowHandler(ViewModelBase newViewModel);
-    public delegate void SectionsListHandler(Guid courseId);
-    public delegate void ThemesListHandler(Guid courseId, Guid sectionId);
+    public delegate void CoursesListHandler(CollectionChangeType collectionChangeType, CourseFull trigeredItem);
+    public delegate void SectionsListHandler(CollectionChangeType collectionChangeType, SectionFull trigeredItem);
+    public delegate void ThemesListHandler(CollectionChangeType collectionChangeType, Theme trigeredItem);
 
     public class AppState
     {
@@ -41,10 +43,16 @@ namespace EEMC2
             }
         }
 
+        public event CoursesListHandler? CoursesListChanged;
+        public void FireCoursesListChanged(CollectionChangeType collectionChangeType, CourseFull trigeredItem) =>
+            CoursesListChanged?.Invoke(collectionChangeType, trigeredItem);
+
         public event SectionsListHandler? SectionsListChanged;
-        public void FireSectionsListChanged(Guid courseId) => SectionsListChanged?.Invoke(courseId);
+        public void FireSectionsListChanged(CollectionChangeType collectionChangeType, SectionFull trigeredItem) =>
+            SectionsListChanged?.Invoke(collectionChangeType, trigeredItem);
 
         public event ThemesListHandler? ThemesListChanged;
-        public void FireThemesListChanged(Guid courseId, Guid sectionId) => ThemesListChanged?.Invoke(courseId, sectionId);
+        public void FireThemesListChanged(CollectionChangeType collectionChangeType, Theme trigeredItem) =>
+            ThemesListChanged?.Invoke(collectionChangeType, trigeredItem);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using EEMC2.Commands;
+using EEMC2.Extensions;
+using EEMC2.Models;
 using EEMC2.Services.Models;
 using EEMC2.Services.Services.CourseFull;
 using EEMC2.Utils;
@@ -19,9 +21,12 @@ namespace EEMC2.ViewModels
         private readonly WindowService _windowService;
         private readonly IServiceProvider _serviceProvider;
 
-        public ObservableCollection<CoursesListItemVM> Courses => new ObservableCollection<CoursesListItemVM>(
-            _appState.CourseFulls.Select(x => new CoursesListItemVM(x, _appState, _serviceProvider))
-        );
+        private ObservableCollection<CoursesListItemVM> _courses;
+        public ObservableCollection<CoursesListItemVM> Courses
+        {
+            get => _courses;
+            set => SetProperty(ref _courses, value);
+        }
 
         public CoursesListVM(AppState appState, WindowService windowService, IServiceProvider serviceProvider) 
         {
@@ -29,9 +34,26 @@ namespace EEMC2.ViewModels
             _windowService = windowService;
             _serviceProvider = serviceProvider;
 
-            _appState.CourseFulls.CollectionChanged += (sender, e) => OnPropertyChanged(nameof(Courses));
+            Courses = new ObservableCollection<CoursesListItemVM>(
+                _appState.CourseFulls.Select(x => new CoursesListItemVM(x, _appState, _serviceProvider))
+            );
+
+            _appState.CoursesListChanged += OnCoursesChanged;
 
             AddCourse = new ActionCommand(OnAddCourse);
+        }
+
+        private void OnCoursesChanged(CollectionChangeType collectionChangeType, CourseFull courseFull)
+        {
+            switch (collectionChangeType)
+            {
+                case CollectionChangeType.Added:
+                    Courses.Add(new CoursesListItemVM(courseFull, _appState, _serviceProvider));
+                    break;
+                case CollectionChangeType.Removed:
+                    Courses.RemoveFirst(item => item.ObservableCourseFull.CourseFull == courseFull);
+                    break;
+            }
         }
 
         private void OnAddCourse(object param)

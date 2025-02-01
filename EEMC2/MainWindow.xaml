@@ -9,8 +9,8 @@
         xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
         DataContext="{Binding MainWindowVM, Source={StaticResource ViewModelLocator}}"
-        Height="450"
-        Width="800">
+        Height="800"
+        Width="1000">
     <Grid Margin="5">
         <ScrollViewer>
             <ContentControl Content="{Binding Path=SelectedViewModel}"/>

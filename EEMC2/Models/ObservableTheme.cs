@@ -10,20 +10,20 @@ namespace EEMC2.Models
 {
     public class ObservableTheme : ObservableObject
     {
-        private readonly Theme _theme;
+        public Theme Theme { get; private set; }
 
         public ObservableTheme(Theme theme)
         {
-            _theme = theme;
+            Theme = theme;
         }
 
         public string ThemeName
         {
-            get => _theme.Name;
+            get => Theme.Name;
             set => SetProperty(
-                _theme.Name,
+                Theme.Name,
                 value,
-                _theme,
+                Theme,
                 (theme, themeName) => theme.Name = themeName
             );
         }

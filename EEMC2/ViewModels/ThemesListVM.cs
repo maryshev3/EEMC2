@@ -1,4 +1,6 @@
-﻿using EEMC2.Models;
+﻿using EEMC2.Extensions;
+using EEMC2.Models;
+using EEMC2.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,18 +29,6 @@ namespace EEMC2.ViewModels
             _courseId = courseId;
             _sectionId = sectionId;
 
-            RefreshObservableThemes();
-
-            _appState.ThemesListChanged += OnThemesListChanged;
-        }
-
-        ~ThemesListVM() 
-        {
-            _appState.ThemesListChanged -= OnThemesListChanged;
-        }
-
-        private void RefreshObservableThemes()
-        {
             ObservableThemes = new ObservableCollection<ObservableTheme>(
                 _appState
                     .CourseFulls
@@ -48,13 +38,30 @@ namespace EEMC2.ViewModels
                     .Themes
                     .Select(theme => new ObservableTheme(theme))
             );
+
+            _appState.ThemesListChanged += OnThemesListChanged;
         }
 
-        private void OnThemesListChanged(Guid courseId, Guid sectionId)
+        ~ThemesListVM() 
         {
-            if (_courseId == courseId && _sectionId == sectionId) 
+            _appState.ThemesListChanged -= OnThemesListChanged;
+        }
+
+        private void OnThemesListChanged(CollectionChangeType collectionChangeType, Theme trigeredItem)
+        {
+            if (trigeredItem.SectionId != _sectionId) 
             {
-                RefreshObservableThemes();
+                return;
+            }
+
+            switch(collectionChangeType)
+            {
+                case CollectionChangeType.Added:
+                    ObservableThemes.Add(new ObservableTheme(trigeredItem));
+                    break;
+                case CollectionChangeType.Removed:
+                    ObservableThemes.RemoveFirst(item => item.Theme ==  trigeredItem);
+                    break;
             }
         }
     }

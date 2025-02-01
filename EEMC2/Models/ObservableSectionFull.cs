@@ -10,20 +10,20 @@ namespace EEMC2.Models
 {
     public class ObservableSectionFull : ObservableObject
     {
-        private readonly SectionFull _sectionFull;
+        public SectionFull SectionFull { get; private set; }
 
         public ObservableSectionFull(SectionFull sectionFull)
         {
-            _sectionFull = sectionFull;
+            SectionFull = sectionFull;
         }
 
         public string SectionName
         {
-            get => _sectionFull.Section.Name;
+            get => SectionFull.Section.Name;
             set => SetProperty(
-                _sectionFull.Section.Name,
+                SectionFull.Section.Name,
                 value,
-                _sectionFull,
+                SectionFull,
                 (sectionFull, sectionName) => sectionFull.Section.Name = sectionName
             );
         }

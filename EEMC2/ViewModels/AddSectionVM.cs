@@ -1,4 +1,5 @@
 ﻿using EEMC2.Commands;
+using EEMC2.Models;
 using EEMC2.Services.Models;
 using EEMC2.Services.Services.SectionFull;
 using System;
@@ -44,7 +45,7 @@ namespace EEMC2.ViewModels
 
             courseFull.SectionFulls.Add(sectionFull);
 
-            _appState.FireSectionsListChanged(courseFull.Course.Id);
+            _appState.FireSectionsListChanged(CollectionChangeType.Added, sectionFull);
         }
     }
 }
