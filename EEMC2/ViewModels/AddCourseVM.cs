@@ -17,6 +17,8 @@ namespace EEMC2.ViewModels
         private readonly ICourseFullService _courseFullService;
         private readonly AppState _appState;
 
+        public string CourseName { get; set; }
+
         public AddCourseVM(ICourseFullService courseFullService, AppState appState) 
         {
             _courseFullService = courseFullService;
@@ -27,11 +29,9 @@ namespace EEMC2.ViewModels
 
         private void OnAddCourse(object obj)
         {
-            string courseName = (string)obj;
-
             Course course = new()
             {
-                Name = courseName,
+                Name = CourseName,
             };
 
             CourseFull addedCourse = _courseFullService.Add(course);

@@ -23,7 +23,7 @@
                 FontSize="16"
                 BorderThickness="0, 0, 0, 1"
                 HorizontalAlignment="Stretch"
-                x:Name="inputBox">
+                Text="{Binding Path=CourseName, Mode=TwoWay}">
                 </TextBox>
             </StackPanel>
             <DockPanel Margin="0, 10, 0, 10">
@@ -33,7 +33,6 @@
                     Margin="0, 5, 5, 5"
                     Background="White"
                     BorderThickness="0"
-                    CommandParameter="{Binding Text, ElementName=inputBox}"
                     FontSize="16">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
@@ -51,7 +50,6 @@
                     Background="White"
                     BorderThickness="0"
                     Command="{Binding Path=AddCourse}"
-                    CommandParameter="{Binding Text, ElementName=inputBox}"
                     FontSize="16"
                     FontWeight="SemiBold">
                         <i:Interaction.Triggers>
