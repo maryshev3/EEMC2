@@ -3,6 +3,7 @@ using EEMC2.Extensions;
 using EEMC2.Models;
 using EEMC2.Services.Models;
 using EEMC2.Services.Services.SectionFull;
+using EEMC2.Services.Services.Theme;
 using EEMC2.Utils;
 using EEMC2.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,15 @@ namespace EEMC2.ViewModels
         private readonly AppState _appState;
         private readonly WindowService _windowService;
         private readonly ISectionFullService _sectionFullService;
+        private readonly IThemeService _themeService;
         private readonly Guid _courseId;
+
+        private ThemesListVM _selectedSection;
+        public ThemesListVM SelectedSection
+        {
+            get => _selectedSection;
+            set => SetProperty(ref _selectedSection, value);
+        }
 
         private ObservableCollection<ObservableSectionFull> _observableSectionsFull;
         public ObservableCollection<ObservableSectionFull> ObservableSectionsFull 
@@ -34,12 +43,14 @@ namespace EEMC2.ViewModels
             AppState appState,
             WindowService windowService,
             ISectionFullService sectionFullService,
+            IThemeService themeService,
             Guid courseId
         ) 
         {
             _appState = appState;
             _windowService = windowService;
             _sectionFullService = sectionFullService;
+            _themeService = themeService;
             _courseId = courseId;
 
             ObservableSectionsFull = new ObservableCollection<ObservableSectionFull>(
@@ -51,6 +62,18 @@ namespace EEMC2.ViewModels
             );
 
             _appState.SectionsListChanged += OnSectionsListChanged;
+
+            var firstSection = ObservableSectionsFull.FirstOrDefault();
+            if (firstSection != null)
+            {
+                SelectedSection = new ThemesListVM(
+                    _appState,
+                    _themeService,
+                    _windowService,
+                    _courseId,
+                    firstSection.SectionFull.Section.Id
+                );
+            }
 
             AddSection = new ActionCommand(OnAddSection);
             OpenSection = new ActionCommand(OnOpenSection);
@@ -95,7 +118,15 @@ namespace EEMC2.ViewModels
         public ICommand OpenSection { get; private set; }
         private void OnOpenSection(object param)
         {
+            var chosenSection = (ObservableSectionFull)param;
 
+            SelectedSection = new ThemesListVM(
+                _appState,
+                _themeService,
+                _windowService,
+                _courseId,
+                chosenSection.SectionFull.Section.Id
+            );
         }
     }
 }

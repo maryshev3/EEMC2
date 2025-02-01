@@ -2,6 +2,7 @@
 using EEMC2.Models;
 using EEMC2.Services.Models;
 using EEMC2.Services.Services.SectionFull;
+using EEMC2.Services.Services.Theme;
 using EEMC2.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -38,6 +39,7 @@ namespace EEMC2.ViewModels
                 appState: _appState,
                 windowService: _serviceProvider.GetService<WindowService>(),
                 sectionFullService: _serviceProvider.GetService<ISectionFullService>(),
+                themeService: _serviceProvider.GetService<IThemeService>(),
                 courseId: ObservableCourseFull.CourseFull.Course.Id
             );
 

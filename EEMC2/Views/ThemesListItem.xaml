@@ -8,6 +8,6 @@
              xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ThemesListItemVM}">
     <Grid>
-            
+        <Label Content="{Binding Path=ObservableTheme.ThemeName}"/>
     </Grid>
 </UserControl>

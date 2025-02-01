@@ -7,18 +7,27 @@
              mc:Ignorable="d" 
              xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:SectionsListVM}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Button Content="Добавить раздел" Command="{Binding Path=AddSection}" Template="{DynamicResource RoundedButton}" Grid.Row="0"/>
-        <ListBox ItemsSource="{Binding Path=ObservableSectionsFull}" Grid.Row="1">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Path=SectionName}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+    <StackPanel Orientation="Horizontal">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="Добавить раздел" Command="{Binding Path=AddSection}" Template="{DynamicResource RoundedButton}" Grid.Row="0"/>
+            <ListBox 
+                ItemsSource="{Binding Path=ObservableSectionsFull}"
+                Grid.Row="1"
+                Name="SectionsListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button 
+                            Content="{Binding Path=SectionName}"
+                            Command="{Binding ElementName=SectionsListBox, Path=DataContext.OpenSection}"
+                            CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <ContentControl Content="{Binding Path=SelectedSection}"/>
+    </StackPanel>
 </UserControl>

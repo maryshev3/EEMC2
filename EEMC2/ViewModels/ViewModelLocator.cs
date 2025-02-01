@@ -32,7 +32,6 @@ namespace EEMC2.ViewModels
 
         public static MainWindowVM MainWindowVM => _serviceProvider.GetService<MainWindowVM>();
         public static CoursesListVM CoursesListVM => _serviceProvider.GetService<CoursesListVM>();
-        public static AddCourseVM AddCourseVM => _serviceProvider.GetService<AddCourseVM>();
 
         private static void InitFileRepositories(IServiceCollection services, string filesBasePath)
         {

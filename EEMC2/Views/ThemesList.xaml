@@ -8,6 +8,27 @@
              xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ThemesListVM}">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button 
+            Content="Добавить тему"
+            FontSize="16"
+            Grid.Row="0"
+            Template="{DynamicResource RoundedButton}"
+            Command="{Binding Path=AddTheme}"/>
+        <ItemsControl ItemsSource="{Binding Path=ObservableThemesListItemVM}" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:ThemesListItem/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
