@@ -44,7 +44,7 @@ namespace EEMC2.ViewModels
 
             courseFull.SectionFulls.Add(sectionFull);
 
-            _appState.FireSectionsListChanged(courseFull);
+            _appState.FireSectionsListChanged(courseFull.Course.Id);
         }
     }
 }
