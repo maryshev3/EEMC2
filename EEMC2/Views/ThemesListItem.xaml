@@ -8,6 +8,119 @@
              xmlns:viewmodels="clr-namespace:EEMC2.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ThemesListItemVM}">
     <Grid>
-        <Label Content="{Binding Path=ObservableTheme.ThemeName}"/>
+        <Border
+            Height="Auto"
+            BorderThickness="1"
+            BorderBrush="#a4b3ca"
+            Margin="0, 5, 5, 5"
+            CornerRadius="10"
+            Padding="3"
+            HorizontalAlignment="Stretch">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <DockPanel>
+                    <Button
+                        HorizontalAlignment="Right"
+                        BorderThickness="0"
+                        Background="White"
+                        Template="{StaticResource RoundedButton}">
+                        <Label Content="Вниз"/>
+                    </Button>
+                    <Button
+                        HorizontalAlignment="Right"
+                        Background="White"
+                        Template="{StaticResource RoundedButton}">
+                        <Label Content="Вверх"/>
+                    </Button>
+                    <Button
+                        Template="{StaticResource RoundedButton}"
+                        HorizontalAlignment="Right"
+                        Background="White">
+                        <Label Content="Удалить"/>
+                    </Button>
+                </DockPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Path=ObservableTheme.ThemeName}" FontWeight="Bold" FontSize="16"/>
+                        <Button
+                            Template="{StaticResource RoundedButton}"
+                            Background="White">
+                            <Label Content="Изменить имя"/>
+                        </Button>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold" FontSize="16">Аннотация:</Label>
+                                <Button
+                                    Grid.Column="1"
+                                    Template="{StaticResource RoundedButton}"
+                                    Background="White">
+                                    <Label Content="Изменить аннотацию"/>
+                                </Button>
+                            </StackPanel>
+                            <Label>
+                                <TextBlock 
+                                    TextWrapping="Wrap"
+                                    TextTrimming="None"
+                                    Text="Текст аннотации"
+                                    FontSize="16"/>
+                            </Label>
+                        </StackPanel>
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label FontSize="16" FontWeight="Bold" Grid.Row="0">Файлы:</Label>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <Button
+                                Template="{StaticResource RoundedButton}"
+                                Margin="5, 5, 5, 5"
+                                Background="White"
+                                BorderBrush="#a4b3ca"
+                                HorizontalAlignment="Left"
+                                FontSize="16">
+                                <Label>Добавить файл</Label>
+                            </Button>
+                            <Button
+                                Template="{StaticResource RoundedButton}"
+                                Margin="5, 5, 5, 5"
+                                Background="White"
+                                BorderBrush="#a4b3ca"
+                                HorizontalAlignment="Left"
+                                FontSize="16">
+                                <Label>Добавить тест</Label>
+                            </Button>
+                            <Button
+                                Template="{StaticResource RoundedButton}"
+                                Margin="5, 5, 5, 5"
+                                Background="White"
+                                BorderBrush="#a4b3ca"
+                                HorizontalAlignment="Left"
+                                FontSize="16">
+                                <Label>Добавить итоговый тест</Label>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <Label FontSize="16">Скрыть при экспорте?</Label>
+                        <CheckBox
+                            Width="35"
+                            Height="35"
+                            Margin="5, 10, 0, 0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
