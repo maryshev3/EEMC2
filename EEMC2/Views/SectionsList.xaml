@@ -14,19 +14,28 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Content="Добавить раздел" Command="{Binding Path=AddSection}" Template="{DynamicResource RoundedButton}" Grid.Row="0"/>
-            <ListBox 
+            <ItemsControl 
                 ItemsSource="{Binding Path=ObservableSectionsFull}"
+                HorizontalAlignment="Stretch"
                 Grid.Row="1"
                 Name="SectionsListBox">
-                <ListBox.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button 
+                            Style="{StaticResource TextButton}"
+                            Background="White"
                             Content="{Binding Path=SectionName}"
                             Command="{Binding ElementName=SectionsListBox, Path=DataContext.OpenSection}"
-                            CommandParameter="{Binding}"/>
+                            CommandParameter="{Binding}"
+                            FontSize="16"/>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
         <ContentControl Content="{Binding Path=SelectedSection}"/>
     </StackPanel>
