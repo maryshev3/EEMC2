@@ -15,26 +15,51 @@
             CommandParameter="{Binding}"
             Background="White"
             Margin="0"
-            Padding="0"
-            HorizontalContentAlignment="Center">
+            Padding="0">
             <Grid MinWidth="220">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Border BorderThickness="0" Grid.Row="0" CornerRadius="10,10,0,0">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Path=ObservableCourseFull.CourseFull.CourseImage.ImagePath}" Stretch="Fill"/>
                     </Border.Background>
                 </Border>
-                <TextBlock
-                    Grid.Row="1"
-                    Margin="5"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Text="{Binding Path=ObservableCourseFull.CourseFull.Course.Name}"
-                    Foreground="{StaticResource CourseNameColor}"
-                    FontSize="16"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Margin="10, 0, 0, 5"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Text="{Binding Path=ObservableCourseFull.CourseFull.Course.Name}"
+                        TextWrapping="Wrap"
+                        TextTrimming="WordEllipsis"
+                        LineHeight="28"
+                        MaxHeight="84"
+                        Foreground="{StaticResource CourseNameColor}"
+                        FontSize="16"
+                        Grid.Column="0"/>
+                    <Button 
+                        Background="{StaticResource GreyBackground}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Template="{StaticResource ImageButton}"
+                        Margin="5, 5, 10, 5"
+                        Grid.Column="1">
+                        <Control
+                            Template="{DynamicResource ThreePoints}"
+                            Width="10"
+                            Height="30"/>
+                    </Button>
+                </Grid>
             </Grid>
         </Button>
     </Grid>

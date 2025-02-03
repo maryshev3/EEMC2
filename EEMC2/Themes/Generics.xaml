@@ -14,18 +14,43 @@
     <SolidColorBrush x:Key="GreyBackground" Color="#f8f9fa"/>
     <SolidColorBrush x:Key="BorderBrushColor" Color="#d9dadb"/>
 
-    <ControlTemplate x:Key="CourseButton" TargetType="Button">
+    <ControlTemplate x:Key="ImageButton" TargetType="Button">
         <Border 
             x:Name="Border"
             Width="Auto"
             HorizontalAlignment="Center"
+            Height="Auto"
+            CornerRadius="10"
+            BorderThickness="0">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Button"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Border.IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoveredAdd}"/>
+                <Setter TargetName="Border" Property="Opacity" Value="0.7"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnEnabled}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedAdd}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CourseButton" TargetType="Button">
+        <Border 
+            x:Name="Border"
+            Width="Auto"
+            HorizontalAlignment="Stretch"
             Background="{StaticResource GreyBackground}"
             Height="Auto"
             CornerRadius="10"
             Margin="0, 5, 10, 5"
             BorderThickness="2"
             BorderBrush="{StaticResource BorderBrushColor}">
-            <ContentPresenter TextBlock.FontSize="16" HorizontalAlignment="Center"/>
+            <ContentPresenter TextBlock.FontSize="16" HorizontalAlignment="Stretch"/>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Border.IsMouseOver" Value="True">
@@ -123,5 +148,34 @@ BorderBrush="Black">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedCancel}"/>
             </Trigger>
         </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ThreePoints">
+        <Viewbox 
+        Width="{TemplateBinding Width}"
+        Height="{TemplateBinding Height}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Path
+                    Fill="{TemplateBinding Foreground}"
+                    Data="M0,5A5,5,0,1,0,10,5A5,5,0,1,0,0,5"
+                    Grid.Row="0"
+                    Margin="1"/>
+                <Path
+                    Fill="{TemplateBinding Foreground}"
+                    Data="M0,5A5,5,0,1,0,10,5A5,5,0,1,0,0,5"
+                    Grid.Row="1"
+                    Margin="1"/>
+                <Path
+                    Fill="{TemplateBinding Foreground}"
+                    Data="M0,5A5,5,0,1,0,10,5A5,5,0,1,0,0,5"
+                    Grid.Row="2"
+                    Margin="1"/>
+            </Grid>
+        </Viewbox>
     </ControlTemplate>
 </ResourceDictionary>
