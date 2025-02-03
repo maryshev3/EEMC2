@@ -9,27 +9,37 @@
       d:DataContext="{d:DesignInstance Type=viewmodels:CoursesListVM}"
         DataContext="{Binding CoursesListVM, Source={StaticResource ViewModelLocator}}">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button 
-            Command="{Binding Path=AddCourse}"
-            Grid.Row="0"
-            Template="{DynamicResource ResourceKey=RoundedButton}"
-            Content="Добавить курс"/>
-        <ItemsControl ItemsSource="{Binding Path=Courses}" Grid.Row="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel HorizontalAlignment="Stretch"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:CoursesListItem/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Label Content="Список курсов" FontSize="18" FontWeight="Bold" Margin="10, 0, 0, 10"/>
+        <Border Padding="20" BorderThickness="2" CornerRadius="10" BorderBrush="{StaticResource BorderBrushColor}" Background="{StaticResource GreyBackground}"  Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ItemsControl ItemsSource="{Binding Path=Courses}" Grid.Row="0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Top" Columns="3"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:CoursesListItem/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button 
+                    Command="{Binding Path=AddCourse}"
+                    Template="{DynamicResource RoundedButtonWithoutBorderGreen}"
+                    Content="Добавить курс"
+                    Grid.Row="1"
+                    Margin="0, 10, 0, 0"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

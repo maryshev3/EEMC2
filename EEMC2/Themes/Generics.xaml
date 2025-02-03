@@ -10,6 +10,36 @@
     <SolidColorBrush x:Key="BorderBrushMain" Color="#4fbe82"/>
     <SolidColorBrush x:Key="BorderBrushSeparator" Color="#a5a9ac"/>
     <SolidColorBrush x:Key="UnEnabled" Color="#f0f0f0"/>
+    <SolidColorBrush x:Key="CourseNameColor" Color="#0f6ccc"/>
+    <SolidColorBrush x:Key="GreyBackground" Color="#f8f9fa"/>
+    <SolidColorBrush x:Key="BorderBrushColor" Color="#d9dadb"/>
+
+    <ControlTemplate x:Key="CourseButton" TargetType="Button">
+        <Border 
+            x:Name="Border"
+            Width="Auto"
+            HorizontalAlignment="Center"
+            Background="{StaticResource GreyBackground}"
+            Height="Auto"
+            CornerRadius="10"
+            Margin="0, 5, 10, 5"
+            BorderThickness="2"
+            BorderBrush="{StaticResource BorderBrushColor}">
+            <ContentPresenter TextBlock.FontSize="16" HorizontalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Border.IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundHoveredAdd}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnEnabled}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ForegroundSelectedAdd}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
     <ControlTemplate x:Key="RoundedButton" TargetType="Button">
         <Border 

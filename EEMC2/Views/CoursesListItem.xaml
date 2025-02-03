@@ -9,18 +9,15 @@
             d:DataContext="{d:DesignInstance Type=viewmodels:CoursesListItemVM}">
     <Grid>
         <Button
-                Name="CourseButton"
-                Template="{DynamicResource ResourceKey=RoundedButton}"
-                Command="{Binding Path=OpenCourse}"
-                CommandParameter="{Binding}"
-                Background="White"
-                Height="auto"
-                Margin="10"
-                Padding="0"
-                HorizontalContentAlignment="Center"
-                BorderThickness="1"
-                BorderBrush="#a4b3ca">
-            <Grid Width="220">
+            Name="CourseButton"
+            Template="{DynamicResource ResourceKey=CourseButton}"
+            Command="{Binding Path=OpenCourse}"
+            CommandParameter="{Binding}"
+            Background="White"
+            Margin="0"
+            Padding="0"
+            HorizontalContentAlignment="Center">
+            <Grid MinWidth="220">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="auto"/>
@@ -31,13 +28,13 @@
                     </Border.Background>
                 </Border>
                 <TextBlock
-                        Grid.Row="1"
-                        Margin="0,0,0,0"
-                        Foreground="Black"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Text="{Binding Path=ObservableCourseFull.CourseFull.Course.Name}"
-                        FontSize="16"/>
+                    Grid.Row="1"
+                    Margin="5"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Text="{Binding Path=ObservableCourseFull.CourseFull.Course.Name}"
+                    Foreground="{StaticResource CourseNameColor}"
+                    FontSize="16"/>
             </Grid>
         </Button>
     </Grid>
